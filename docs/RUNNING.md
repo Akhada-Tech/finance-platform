@@ -23,12 +23,18 @@ pnpm install
 
 ### iOS pods
 
-Run after the first install, and again whenever native iOS dependencies change:
+Run after the first install:
 
 ```bash
 cd apps/mobile/ios
 pod install
 cd ../../..
+```
+
+Whenever you add or change native iOS packages, re-run:
+
+```bash
+cd apps/mobile/ios && pod install
 ```
 
 If the project later adds a `Gemfile` under `apps/mobile/ios`, prefer:
@@ -142,6 +148,7 @@ Enable USB debugging on the device, connect it, confirm it appears in `adb devic
 | Problem | What to try |
 |---|---|
 | `pod install` fails | Update CocoaPods; clear `apps/mobile/ios/Pods` and `Podfile.lock`, then reinstall |
+| `Failed to get NitroModules` (or similar missing native module at runtime) | Native deps were added in JS but not linked — run `cd apps/mobile/ios && pod install`, then rebuild with `pnpm ios` |
 | Metro cache issues | `pnpm --filter @finance-platform/mobile start -- --reset-cache` |
 | iOS build fails after dependency change | Re-run `pod install`, then clean build in Xcode (**Product → Clean Build Folder**) |
 | Android `SDK location not found` | Set `ANDROID_HOME`, or create `apps/mobile/android/local.properties` with `sdk.dir=/path/to/sdk` |

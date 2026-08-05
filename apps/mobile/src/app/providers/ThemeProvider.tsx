@@ -1,11 +1,14 @@
 import {
   createContext,
   useContext,
+  useEffect,
   useMemo,
   useState,
   type ReactNode,
 } from 'react';
 import { useColorScheme } from 'react-native';
+
+import { syncUnistylesPreference } from '../theme/syncUnistylesPreference';
 
 export type ColorSchemePreference = 'light' | 'dark' | 'system';
 export type ResolvedColorScheme = 'light' | 'dark';
@@ -24,9 +27,8 @@ type ThemeProviderProps = {
 };
 
 /**
- * App-level theme preference bridge.
- * Design tokens / Unistyles registration land in later sections;
- * Zustand will own persistence of `preference` in the state section.
+ * Owns theme preference and keeps Unistyles runtime in sync.
+ * Persistence moves to Zustand in the state-management section.
  */
 export function ThemeProvider({
   children,
@@ -50,6 +52,10 @@ export function ThemeProvider({
       setPreference,
     };
   }, [preference, systemScheme]);
+
+  useEffect(() => {
+    syncUnistylesPreference(preference);
+  }, [preference]);
 
   return (
     <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>

@@ -1,4 +1,7 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet } from 'react-native-unistyles';
+
+import { Screen } from './Screen';
+import { Text } from './Text';
 
 type PlaceholderScreenProps = {
   name: string;
@@ -6,29 +9,22 @@ type PlaceholderScreenProps = {
 
 /**
  * Temporary screen body used only to verify navigation wiring.
- * Replaced by real feature UI later — not a design-system primitive.
+ * Uses design-system primitives; not a permanent design-system export.
  */
 export function PlaceholderScreen({ name }: PlaceholderScreenProps) {
   return (
-    <View
-      style={styles.container}
+    <Screen
       testID={`screen-${name.toLowerCase().replace(/\s+/g, '-')}`}
+      style={styles.center}
     >
-      <Text style={styles.title}>{name}</Text>
-    </View>
+      <Text variant="title">{name}</Text>
+    </Screen>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
+  center: {
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#FFFFFF',
-  },
-  title: {
-    fontSize: 22,
-    fontWeight: '600',
-    color: '#111827',
   },
 });

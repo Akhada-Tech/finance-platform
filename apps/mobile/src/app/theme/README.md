@@ -2,12 +2,13 @@
 
 ## Why it exists
 
-Registers themes with the styling system and connects theme preference (Zustand) to Unistyles.
+Registers themes with Unistyles and syncs preference runtime APIs.
 
 ## What belongs here
 
-- Theme registration / provider bridge
-- Runtime theme switching glue
+- `unistyles.ts` — `StyleSheet.configure` (imported first from `index.js`)
+- Breakpoints
+- Preference → Unistyles sync helpers
 
 ## What must never go here
 

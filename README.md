@@ -44,4 +44,5 @@ docs/
 - Section 2: `apps/mobile/src` folder structure + architectural READMEs
 - Section 3: app layer (providers, bootstrap, splash, error boundary)
 - Section 4: navigation graph with placeholder screens
-- Next: design system (tokens + primitives)
+- Section 5: design system (Unistyles tokens + primitives)
+- Next: database / storage / state / forms infrastructure
