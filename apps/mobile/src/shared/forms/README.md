@@ -36,8 +36,6 @@ const form = useForm<FormValues>({
 });
 ```
 
-> Path alias `@/` lands in the linting section; until then use relative imports.
-
 ## What must never go here
 
 - Feature-specific schemas (`features/<name>/validation`)

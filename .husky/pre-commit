@@ -1,0 +1,3 @@
+# Use local binaries (Husky prepends node_modules/.bin).
+# Avoid `pnpm` here — GUI Git clients often lack the shell PATH/nvm.
+lint-staged

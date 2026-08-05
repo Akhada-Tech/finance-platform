@@ -6,8 +6,18 @@ Keeps lint rules consistent across apps without copying ESLint config into every
 
 ## What belongs here
 
-- Shared ESLint flat-config fragments
+- Shared ESLint config fragments (`base`, `react-native`)
 - Rule sets used by two or more packages
+
+## Usage
+
+```js
+// apps/mobile/.eslintrc.js
+module.exports = {
+  root: true,
+  extends: ['@finance-platform/eslint-config/react-native'],
+};
+```
 
 ## What must never go here
 

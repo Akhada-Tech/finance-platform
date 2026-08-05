@@ -1,14 +1,9 @@
-import { loadAppConfig, type AppConfig } from '../../core/config/appConfig';
-import {
-  databaseService,
-  type DatabaseService,
-} from '../../core/database/DatabaseService';
-import { logger } from '../../core/logging';
-import {
-  getPreferencesStorage,
-  type KeyValueStorage,
-} from '../../core/storage';
-import { AppError, toAppError } from '../../core/utils/AppError';
+import { loadAppConfig, type AppConfig } from '@/core/config/appConfig';
+import { databaseService, type DatabaseService } from '@/core/database/DatabaseService';
+import { logger } from '@/core/logging';
+import { getPreferencesStorage, type KeyValueStorage } from '@/core/storage';
+import { AppError, toAppError } from '@/core/utils/AppError';
+
 import { hydrateClientStores } from './hydrateClientStores';
 
 export type BootstrapDeps = {

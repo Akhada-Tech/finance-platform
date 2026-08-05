@@ -29,14 +29,22 @@ docs/
 
 ## Scripts
 
-| Command | Description |
-|---|---|
-| `pnpm --filter @finance-platform/mobile start` | Metro bundler |
-| `pnpm android` | Run Android app |
-| `pnpm ios` | Run iOS app |
-| `pnpm lint` | Lint all packages |
-| `pnpm typecheck` | TypeScript check all packages |
-| `pnpm test` | Run tests |
+| Command                                        | Description                   |
+| ---------------------------------------------- | ----------------------------- |
+| `pnpm --filter @finance-platform/mobile start` | Metro bundler                 |
+| `pnpm android`                                 | Run Android app               |
+| `pnpm ios`                                     | Run iOS app                   |
+| `pnpm lint`                                    | Lint all packages             |
+| `pnpm typecheck`                               | TypeScript check all packages |
+| `pnpm test`                                    | Run tests                     |
+| `pnpm format` / `pnpm format:check`            | Prettier                      |
+
+### DX tooling
+
+- Path alias: `@/*` → `apps/mobile/src/*` (TypeScript + Babel + Jest)
+- Husky: pre-commit → lint-staged; commit-msg → Commitlint (conventional commits)
+- Shared ESLint: `@finance-platform/eslint-config/react-native`
+- GUI Git (Cursor/VS Code): Husky loads `~/.config/husky/init.sh` so nvm/Node are on `PATH`
 
 ## Status
 
@@ -48,5 +56,5 @@ docs/
 - Section 6: core + MMKV + SQLite foundation (no business tables)
 - Section 7: Zustand client stores (theme, settings, auth)
 - Section 8: forms (React Hook Form + Zod helpers)
-- Next: linting/tooling (ESLint, Prettier, Husky, path aliases) + GitHub Actions
-
+- Section 9: linting/DX (ESLint, Prettier, Husky, Commitlint, `@/` aliases)
+- Next: GitHub Actions CI + root README polish

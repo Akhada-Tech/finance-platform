@@ -1,6 +1,7 @@
-import type { KeyValueStorage } from '../../core/storage';
-import { useAuthStore } from '../../features/authentication/store/authStore';
-import { useSettingsStore } from '../../features/settings/store/settingsStore';
+import type { KeyValueStorage } from '@/core/storage';
+import { useAuthStore } from '@/features/authentication/store/authStore';
+import { useSettingsStore } from '@/features/settings/store/settingsStore';
+
 import { useThemeStore } from '../stores/themeStore';
 
 /**

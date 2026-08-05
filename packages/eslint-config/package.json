@@ -7,12 +7,22 @@
     "base.js",
     "react-native.js"
   ],
+  "exports": {
+    "./base": "./base.js",
+    "./react-native": "./react-native.js"
+  },
   "scripts": {
     "lint": "echo \"Config package — no source to lint\"",
     "typecheck": "echo \"Config package — no types to check\"",
     "test": "echo \"Config package — no tests\""
   },
   "peerDependencies": {
-    "eslint": ">=8"
+    "eslint": ">=8",
+    "@react-native/eslint-config": "*"
+  },
+  "peerDependenciesMeta": {
+    "@react-native/eslint-config": {
+      "optional": true
+    }
   }
 }

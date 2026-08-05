@@ -1,11 +1,8 @@
 import { useEffect, type ReactNode } from 'react';
 import { useColorScheme } from 'react-native';
 
-import {
-  useThemeStore,
-  type ColorSchemePreference,
-} from '../stores/themeStore';
-import { syncUnistylesPreference } from '../theme/syncUnistylesPreference';
+import { useThemeStore, type ColorSchemePreference } from '@/app/stores/themeStore';
+import { syncUnistylesPreference } from '@/app/theme/syncUnistylesPreference';
 
 export type { ColorSchemePreference };
 export type ResolvedColorScheme = 'light' | 'dark';
@@ -40,11 +37,7 @@ export function useThemePreference(): ThemeContextValue {
   const systemScheme = useColorScheme();
 
   const resolved: ResolvedColorScheme =
-    preference === 'system'
-      ? systemScheme === 'dark'
-        ? 'dark'
-        : 'light'
-      : preference;
+    preference === 'system' ? (systemScheme === 'dark' ? 'dark' : 'light') : preference;
 
   return {
     preference,
