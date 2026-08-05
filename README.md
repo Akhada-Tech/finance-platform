@@ -6,25 +6,52 @@ Offline-first personal finance platform for Indian users.
 
 See [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md). It is the source of truth for engineering decisions.
 
+Related docs:
+
+- [`docs/RUNNING.md`](docs/RUNNING.md) — iOS / Android run steps
+- [`docs/DESIGN_SYSTEM.md`](docs/DESIGN_SYSTEM.md) — Unistyles tokens & primitives
+- [`.github/README.md`](.github/README.md) — CI quality gates
+
+## Prerequisites
+
+- Node.js 22+ (see `.nvmrc`)
+- pnpm 10.x (`corepack enable` recommended)
+- Xcode + CocoaPods (iOS)
+- Android Studio / SDK (Android)
+
+## Setup
+
+```bash
+pnpm install
+```
+
+iOS pods (first time, and after native dependency changes):
+
+```bash
+cd apps/mobile/ios
+bundle install
+bundle exec pod install
+cd ../../..
+```
+
 ## Running the app
-
-See [`docs/RUNNING.md`](docs/RUNNING.md) for iOS Simulator and Android Emulator setup and run steps.
-
-Quick start (after prerequisites):
 
 ```bash
 pnpm install
 pnpm ios      # or: pnpm android
 ```
 
+Full simulator/emulator notes: [`docs/RUNNING.md`](docs/RUNNING.md).
+
 ## Monorepo layout
 
 ```text
-apps/mobile          React Native CLI app (TypeScript)
+apps/mobile                 React Native CLI app (TypeScript)
 packages/eslint-config
 packages/typescript-config
 packages/types
 docs/
+.github/workflows/ci.yml    install → lint → typecheck → test
 ```
 
 ## Scripts
@@ -45,16 +72,21 @@ docs/
 - Husky: pre-commit → lint-staged; commit-msg → Commitlint (conventional commits)
 - Shared ESLint: `@finance-platform/eslint-config/react-native`
 - GUI Git (Cursor/VS Code): Husky loads `~/.config/husky/init.sh` so nvm/Node are on `PATH`
+- CI: GitHub Actions on `main` / `release` and pull requests
 
-## Status
+## Foundation status
 
-- Section 1: monorepo + React Native scaffold
-- Section 2: `apps/mobile/src` folder structure + architectural READMEs
-- Section 3: app layer (providers, bootstrap, splash, error boundary)
-- Section 4: navigation graph with placeholder screens
-- Section 5: design system (Unistyles tokens + primitives)
-- Section 6: core + MMKV + SQLite foundation (no business tables)
-- Section 7: Zustand client stores (theme, settings, auth)
-- Section 8: forms (React Hook Form + Zod helpers)
-- Section 9: linting/DX (ESLint, Prettier, Husky, Commitlint, `@/` aliases)
-- Next: GitHub Actions CI + root README polish
+Engineering foundation is complete for offline V1 scaffolding:
+
+1. Monorepo (Turborepo + pnpm) + React Native 0.86
+2. `src/` feature-first structure
+3. App layer (providers, bootstrap, error boundary)
+4. Navigation (Root → Auth / Main Tabs → feature stacks)
+5. Design system (Unistyles + primitives)
+6. Core data (MMKV, Nitro SQLite, migrations runner — no business tables)
+7. Zustand stores (theme, settings, auth)
+8. Forms (RHF + Zod helpers)
+9. Linting / Husky / Commitlint / `@/` aliases
+10. GitHub Actions CI
+
+Business features (accounts, transactions, budgets, …) are intentionally not implemented yet.

@@ -17,12 +17,6 @@
     "test": "echo \"Config package — no tests\""
   },
   "peerDependencies": {
-    "eslint": ">=8",
-    "@react-native/eslint-config": "*"
-  },
-  "peerDependenciesMeta": {
-    "@react-native/eslint-config": {
-      "optional": true
-    }
+    "eslint": ">=8"
   }
 }

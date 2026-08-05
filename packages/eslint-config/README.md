@@ -19,6 +19,8 @@ module.exports = {
 };
 ```
 
+The mobile app must also depend on `@react-native/eslint-config` (already included in the RN template).
+
 ## What must never go here
 
 - App-specific one-off overrides that only one package needs
