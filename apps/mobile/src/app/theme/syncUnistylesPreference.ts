@@ -1,6 +1,6 @@
 import { UnistylesRuntime } from 'react-native-unistyles';
 
-import type { ColorSchemePreference } from '../providers/ThemeProvider';
+import type { ColorSchemePreference } from '../stores/themeStore';
 
 /**
  * Bridges app preference state to Unistyles runtime.
@@ -17,3 +17,4 @@ export function syncUnistylesPreference(
   UnistylesRuntime.setAdaptiveThemes(false);
   UnistylesRuntime.setTheme(preference);
 }
+

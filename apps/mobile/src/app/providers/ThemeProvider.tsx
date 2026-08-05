@@ -1,16 +1,13 @@
-import {
-  createContext,
-  useContext,
-  useEffect,
-  useMemo,
-  useState,
-  type ReactNode,
-} from 'react';
+import { useEffect, type ReactNode } from 'react';
 import { useColorScheme } from 'react-native';
 
+import {
+  useThemeStore,
+  type ColorSchemePreference,
+} from '../stores/themeStore';
 import { syncUnistylesPreference } from '../theme/syncUnistylesPreference';
 
-export type ColorSchemePreference = 'light' | 'dark' | 'system';
+export type { ColorSchemePreference };
 export type ResolvedColorScheme = 'light' | 'dark';
 
 type ThemeContextValue = {
@@ -19,55 +16,39 @@ type ThemeContextValue = {
   setPreference: (preference: ColorSchemePreference) => void;
 };
 
-const ThemeContext = createContext<ThemeContextValue | null>(null);
-
 type ThemeProviderProps = {
   children: ReactNode;
-  initialPreference?: ColorSchemePreference;
 };
 
 /**
- * Owns theme preference and keeps Unistyles runtime in sync.
- * Persistence moves to Zustand in the state-management section.
+ * Syncs Zustand theme preference to Unistyles.
+ * Zustand needs no React provider — this only bridges runtime styling.
  */
-export function ThemeProvider({
-  children,
-  initialPreference = 'system',
-}: ThemeProviderProps) {
-  const systemScheme = useColorScheme();
-  const [preference, setPreference] =
-    useState<ColorSchemePreference>(initialPreference);
-
-  const value = useMemo<ThemeContextValue>(() => {
-    const resolved: ResolvedColorScheme =
-      preference === 'system'
-        ? systemScheme === 'dark'
-          ? 'dark'
-          : 'light'
-        : preference;
-
-    return {
-      preference,
-      resolved,
-      setPreference,
-    };
-  }, [preference, systemScheme]);
+export function ThemeProvider({ children }: ThemeProviderProps) {
+  const preference = useThemeStore(state => state.preference);
 
   useEffect(() => {
     syncUnistylesPreference(preference);
   }, [preference]);
 
-  return (
-    <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>
-  );
+  return children;
 }
 
 export function useThemePreference(): ThemeContextValue {
-  const value = useContext(ThemeContext);
+  const preference = useThemeStore(state => state.preference);
+  const setPreference = useThemeStore(state => state.setPreference);
+  const systemScheme = useColorScheme();
 
-  if (!value) {
-    throw new Error('useThemePreference must be used within ThemeProvider');
-  }
+  const resolved: ResolvedColorScheme =
+    preference === 'system'
+      ? systemScheme === 'dark'
+        ? 'dark'
+        : 'light'
+      : preference;
 
-  return value;
+  return {
+    preference,
+    resolved,
+    setPreference,
+  };
 }

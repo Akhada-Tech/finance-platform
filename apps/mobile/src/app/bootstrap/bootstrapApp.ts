@@ -9,6 +9,7 @@ import {
   type KeyValueStorage,
 } from '../../core/storage';
 import { AppError, toAppError } from '../../core/utils/AppError';
+import { hydrateClientStores } from './hydrateClientStores';
 
 export type BootstrapDeps = {
   config?: AppConfig;
@@ -17,7 +18,7 @@ export type BootstrapDeps = {
 };
 
 /**
- * Ordered app startup: config → database → storage warm-up.
+ * Ordered app startup: config → database → storage → hydrate client stores.
  */
 export async function bootstrapApp(deps: BootstrapDeps = {}): Promise<void> {
   try {
@@ -28,8 +29,8 @@ export async function bootstrapApp(deps: BootstrapDeps = {}): Promise<void> {
     await database.initialize();
 
     const preferences = deps.preferencesStorage ?? getPreferencesStorage();
-    // Touch storage so native/memory backend fails fast during splash.
     preferences.contains('__bootstrap_probe__');
+    hydrateClientStores(preferences);
 
     logger.info('bootstrap.ready', { env: config.env });
   } catch (error) {

@@ -46,5 +46,7 @@ docs/
 - Section 4: navigation graph with placeholder screens
 - Section 5: design system (Unistyles tokens + primitives)
 - Section 6: core + MMKV + SQLite foundation (no business tables)
-- Next: Zustand stores, forms (RHF + Zod), linting/CI hardening
+- Section 7: Zustand client stores (theme, settings, auth)
+- Section 8: forms (React Hook Form + Zod helpers)
+- Next: linting/tooling (ESLint, Prettier, Husky, path aliases) + GitHub Actions
 

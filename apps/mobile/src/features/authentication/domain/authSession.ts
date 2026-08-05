@@ -1,9 +1,8 @@
-/**
- * Local session stub until the Zustand auth store lands.
- * Offline V1 treats the user as signed in so Main Tabs are reachable.
- */
-export type AuthStatus = 'authenticated' | 'unauthenticated';
+import { useAuthStore, type AuthStatus } from '../store/authStore';
 
+export type { AuthStatus };
+
+/** Imperative auth status for non-React callers. Prefer useAuthStore in components. */
 export function getAuthStatus(): AuthStatus {
-  return 'authenticated';
+  return useAuthStore.getState().status;
 }

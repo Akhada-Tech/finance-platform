@@ -29,7 +29,7 @@ test('splash screen renders brand name', async () => {
   expect(labels).toContain('Finance Platform');
 });
 
-test('auth session stub is authenticated for offline V1', () => {
+test('auth store defaults to authenticated for offline V1', () => {
   expect(getAuthStatus()).toBe('authenticated');
 });
 
