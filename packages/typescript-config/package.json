@@ -1,0 +1,15 @@
+{
+  "name": "@finance-platform/typescript-config",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Shared TypeScript configs for the finance-platform monorepo",
+  "files": [
+    "base.json",
+    "react-native.json"
+  ],
+  "scripts": {
+    "lint": "echo \"Config package — no source to lint\"",
+    "typecheck": "echo \"Config package — no types to check\"",
+    "test": "echo \"Config package — no tests\""
+  }
+}
