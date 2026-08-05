@@ -45,4 +45,6 @@ docs/
 - Section 3: app layer (providers, bootstrap, splash, error boundary)
 - Section 4: navigation graph with placeholder screens
 - Section 5: design system (Unistyles tokens + primitives)
-- Next: database / storage / state / forms infrastructure
+- Section 6: core + MMKV + SQLite foundation (no business tables)
+- Next: Zustand stores, forms (RHF + Zod), linting/CI hardening
+
