@@ -17,6 +17,8 @@ Enforces Architecture §16–17: every push/PR must pass install, lint, typechec
 
 Triggers: `push` to `main` / `release`, and all `pull_request`s.
 
+Actions: `actions/checkout@v5`, `pnpm/action-setup@v6`, `actions/setup-node@v6` (Node from `.nvmrc`).
+
 ## What belongs here
 
 - Quality gates that block merges
